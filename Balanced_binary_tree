@@ -1,33 +1,23 @@
-class TreeNode:
-    def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 
-def height(root):
-    if not root:
-        return 0
-    return 1 + max(height(root.left), height(root.right))
-
-def is_balanced(root):
-    if not root:
-        return True
-
-    left_height = height(root.left)
-    right_height = height(root.right)
-
-    if abs(left_height - right_height) > 1:
-        return False
-
-    return is_balanced(root.left) and is_balanced(root.right)
-
-# Example Usage:
-root = TreeNode(1)
-root.left = TreeNode(2)
-root.right = TreeNode(3)
-root.left.left = TreeNode(4)
-root.left.right = TreeNode(5)
-root.right.right = TreeNode(6)
-root.left.left.left = TreeNode(7)  # Unbalanced case
-
-print("Is the tree balanced?", is_balanced(root))  # Output: False
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode() 
+        cur = dummy
+        carry = 0
+        while l1 or l2 or carry:
+            sum = carry
+            if l1:
+                sum += l1.val
+                l1 = l1.next
+            if l2:
+                sum += l2.val
+                l2 = l2.next
+            carry = sum // 10
+            cur.next = ListNode(sum % 10)
+            cur = cur.next
+        return dummy.next
