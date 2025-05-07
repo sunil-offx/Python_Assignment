@@ -1,0 +1,8 @@
+def sortedArrayToBST(nums):
+    if not nums:
+        return None
+    mid = len(nums) // 2
+    node = TreeNode(nums[mid])
+    node.left = sortedArrayToBST(nums[:mid])
+    node.right = sortedArrayToBST(nums[mid+1:])
+    return node
